@@ -48,7 +48,7 @@
   fill:#ffffff
 }
 
-#statText1{
+/* #statText1{
   font-size: 32;
   font-family: System-Bold;
   text-length: 32;
@@ -65,7 +65,18 @@
   x:50%;
   y:190;
   fill:#ffffff
+} */
+#ffPrimaryStat{
+  x:50%;
+  y:140;
+  fill:#ffffff
 }
+#ffPrimaryTarg{
+  x:50%;
+  y:190;
+  fill:#ffffff
+}
+
 #of{
   font-size: 18;
   font-family: System-Bold;

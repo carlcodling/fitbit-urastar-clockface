@@ -36,9 +36,33 @@
 
   <image id="star1" href="img/star.png" x="52" y="62" width="232" height="232" fill="#3939c5" />
   <image href="img/star.png" x="83" y="88" width="170" height="170" fill="#ffffff" opacity="0.1" />
-  <text id="statText1">8,756</text>
+  <!-- <text id="statText1">8,756</text> -->
+  <use href="#fitfont" id="ffPrimaryStat">
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+  </use>
   <text id="of">of</text>
-  <text id="statText1Targ">10,000</text>
+  <!-- <text id="statText1Targ">10,000</text> -->
+  <use href="#fitfont" id="ffPrimaryTarg">
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+  </use>
   <image id="primaryIcon" href="img/steps.png" />
 
   <svg id="stat2" class="statContainer">
