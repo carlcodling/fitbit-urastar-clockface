@@ -16,7 +16,7 @@
   width:80;
   height:80;
 }
-
+/*
 #time{
   font-size: 52;
   font-family: System-Bold;
@@ -25,23 +25,18 @@
   x:50%;
   y:50;
   fill:#ffffff
-}
-
+} */
+#time {
+    x: 50%;
+    y: 55;
+    fill: #ffffff;
+  }
 #heart{
-  width:40;
-  height:40;
-  x:50%-20;
-  y:60;
+  width:36;
+  height:36;
+  x:50%-18;
+  y:62;
   fill:red;
-}
-
-#darkHeart{
-  width:34;
-  height:34;
-  x:50%-17;
-  y:63;
-  fill:black;
-  opacity:0.3;
 }
 #hr{
   font-size: 21;

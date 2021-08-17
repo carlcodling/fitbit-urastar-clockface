@@ -6,18 +6,32 @@
       <image href="img/star.png" x="15" y="15" width="50" height="50" fill="inherit" />
       <image href="img/star.png" x="25" y="25" width="30" height="30" fill="#000000" opacity="0.2" />
     </symbol>
+    <!-- The symbol for a character -->
+    <symbol id="fitfont-char">
+      <image class="fitfont-char" load="sync" x="0" y="0"/>
+    </symbol>
+
+    <!-- The custom font symbol -->
+    <symbol id="fitfont" />
   </defs>
-  
+
   <rect id="background" />
   <!-- arc id="arcBg" fill="yellow" arc-width="10" start-angle="154" sweep-angle="340" x="70" y="43" width="50" height="50" />
   <image id="bgOverlay" href="img/mockup.png" x="0" y="0" width="100%" height="100%" /-->
   <image id="bg" href="img/bg2.png"  fill="#000056" />
   <image id="bgOverlay" href="img/bgoverlay.png" opacity="0.6"/>
 
-  <text id="time">12:23</text>
+  <!-- <text id="time">12:23</text> -->
+
+  <use href="#fitfont" id="time">
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+    <use href="#fitfont-char"/>
+  </use>
 
   <image id="heart" href="img/heart.png" />
-  <image id="darkHeart" href="img/heart.png" />
   <text id="hr">69</text>
 
   <image id="star1" href="img/star.png" x="52" y="62" width="232" height="232" fill="#3939c5" />

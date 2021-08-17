@@ -2,6 +2,30 @@ import * as document from "document";
 
 import * as util from "../common/utils";
 
+import clock from 'clock'
+import { preferences } from 'user-settings'
+
+import { FitFont } from 'fitfont'
+
+
+// declaration of the FitFont objects
+const timeLbl  = new FitFont({ id:'time',  font:'Manjari_52',  halign: 'middle'})
+
+const updateClock = () => {
+  const now = new Date()
+  let hours = now.getHours()
+  if (preferences.clockDisplay === '12h') {
+    hours = hours % 12 || 12
+  }
+  const minutes = now.getMinutes()
+  timeLbl.text = hours + ':' + ('0'+minutes).slice(-2)
+}
+
+clock.granularity = 'minutes'
+clock.ontick = (evt) => updateClock()
+
+updateClock()
+
 const star1 = document.getElementById("star1");
 const star2 = document.getElementById("stat2");
 const star3 = document.getElementById("stat3");
