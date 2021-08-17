@@ -34,3 +34,14 @@ export function shadeColor(color, n) {
 
     return "#"+RR+GG+BB;
 }
+
+// Add zero in front of numbers < 10
+export function zeroPad(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
