@@ -28,13 +28,16 @@ export function shadeColor(color, n) {
     G = (G<255)?G:255;
     B = (B<255)?B:255;
 
+    R = (R>0)?R:0;
+    G = (G>0)?G:0;
+    B = (B>0)?B:0;
+
     var RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16));
     var GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16));
     var BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16));
 
     return "#"+RR+GG+BB;
 }
-
 // Add zero in front of numbers < 10
 export function zeroPad(i) {
   if (i < 10) {

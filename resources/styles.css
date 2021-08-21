@@ -9,7 +9,7 @@
 #background {
   width: 100%;
   height: 100%;
-  fill: #3939c5;
+  fill: #000060;
 }
 
 .statContainer{
@@ -28,23 +28,32 @@
 } */
 #time {
     x: 50%;
-    y: 55;
+    y: 52;
     fill: #ffffff;
   }
 #heart{
-  width:36;
-  height:36;
-  x:50%-18;
-  y:62;
-  fill:red;
+  width:44;
+  height:44;
+  x:50%-22;
+  y:58;
+  fill:#ffffff;
+  opacity: 0.5;
+}
+#heartInner{
+  width:38;
+  height:38;
+  x:50%-19;
+  y:61;
+  fill:black;
+  opacity:0.8;
 }
 #hr{
-  font-size: 21;
-  font-family: System-Bold;
+  font-size: 18;
+  font-family: System-Regular;
   text-length: 32;
   text-anchor: middle;
   x:50%;
-  y:85;
+  y:83;
   fill:#ffffff
 }
 
@@ -73,7 +82,7 @@
 }
 #ffPrimaryTarg{
   x:50%;
-  y:190;
+  y:182;
   fill:#ffffff
 }
 
@@ -83,7 +92,17 @@
   text-length: 2;
   text-anchor: middle;
   x:50%;
-  y:160;
+  y:156;
+  fill:#ffffff
+}
+
+#primarySuffix{
+  font-size: 18;
+  font-family: System-Bold;
+  text-length: 12;
+  text-anchor: middle;
+  x:50%;
+  y:200;
   fill:#ffffff
 }
 
@@ -92,5 +111,13 @@
   height:40;
   x:50%-20;
   y:210;
+  fill:#ffffff
+}
+
+.txtStat{
+  font-size: 18;
+  font-family: System-Regular;
+  text-length: 12;
+  text-anchor: middle;
   fill:#ffffff
 }
