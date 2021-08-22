@@ -29,9 +29,9 @@
     <use href="#fitfont-char"/>
   </use>
 
-  <image id="heart" href="img/heart.png" />
-  <image id="heartInner" href="img/heart.png" />
-  <text id="hr" />
+  <image id="heart" href="img/heart.png" class="heart" />
+  <image id="heartInner" href="img/heart.png" class="heart" />
+  <text id="hr" class="heart" />
 
   <svg id="primaryGoal" pointer-events="visible">
     <image id="star1" href="img/star.png" x="52" y="62" width="232" height="232" fill="#3939c5" />

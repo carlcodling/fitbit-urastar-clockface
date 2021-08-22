@@ -49,7 +49,6 @@ function settingsCallback(data) {
     return;
   }
   if(data.bg){
-    console.log(data.bg)
     uiBg.style.fill = data.bg;
   }
   const statOrder = [
@@ -113,6 +112,14 @@ function activityCallback(data) {
     simpleSettings.get('color5')
     ];
 
+  if(secondaryFocussed){
+    stylePrimaryStar(
+      data[statOrder[secondaryFocussed]],
+      colors[secondaryFocussed]
+    )
+    return
+  }
+
   const starElems = [star1, star2, star3, star4, star5];
   const textElems = [null,txtStat2,txtStat3,txtStat4,txtStat5];
 
@@ -171,20 +178,7 @@ function activityCallback(data) {
       tip.r = 5;
       tip.cx = coords.x;
       tip.cy = coords.y;
-      // tip.style.fill = hexColor;
-      //
-      // arc.style.fill = hexColor;
-      // star.style.fill = hexColor;
     }
-    // else{
-    //   tip.r = 36;
-    //   tip.cx = 40;
-    //   tip.cy = 40;
-    //   tip.style.fill = util.shadeColor(hexColor, -10);
-    //
-    //   arc.style.fill = util.shadeColor(hexColor, 80);
-    //   star.style.fill = util.shadeColor(hexColor, 120);
-    // }
   }
 }
 simpleActivity.initialize(activityCallback);
@@ -193,11 +187,7 @@ simpleActivity.initialize(activityCallback);
 // TODO: hardcode positions
 function positionStatStars(starElem, txtElem, angle){
   let starCoords = util.getPointOnCircle(angle, RING_RADIUS, 168, 168);
-  //let styleElems = starElem.getElementsByClassName("stat");
-  // var i;
-  // for (i = 0; i < styleElems.length; i++) {
-  //   styleElems[i].style.fill = fill;
-  // }
+
   starElem.x = parseInt(starCoords.x)-SMALL_STAR_RADIUS;
   starElem.y = parseInt(starCoords.y)-SMALL_STAR_RADIUS+10;
   txtElem.x = parseInt(starCoords.x)-SMALL_STAR_RADIUS+40;
@@ -212,28 +202,32 @@ document.getElementById("primaryGoal").onclick = function(){
   clearSecondaryFocus()
 }
 star2.onclick = function(){
-  focusSecondaryGoal(2)
+  focusSecondaryGoal(1)
 }
 star3.onclick = function(){
-  focusSecondaryGoal(3)
+  focusSecondaryGoal(2)
 }
 star4.onclick = function(){
-  focusSecondaryGoal(4)
+  focusSecondaryGoal(3)
 }
 star5.onclick = function(){
-  focusSecondaryGoal(5)
+  focusSecondaryGoal(4)
 }
 
 /* -------- HELPERS ------------- */
 function focusSecondaryGoal(pos){
-  secondaryFocussed = true;
+  secondaryFocussed = pos;
   toggleVisibilityByClass('statContainer', 'hidden');
   toggleVisibilityByClass('txtStat', 'hidden');
+  toggleVisibilityByClass('heart', 'hidden');
+  ffTime.style.visibility = "hidden";
 }
 function clearSecondaryFocus(){
   secondaryFocussed = false;
   toggleVisibilityByClass('statContainer', 'visible');
   toggleVisibilityByClass('txtStat', 'visible');
+  toggleVisibilityByClass('heart', 'visible');
+  ffTime.style.visibility = "visible";
 }
 function stylePrimaryStar(data, color){
   var pcnt = (100/data.goal)*data.raw;
@@ -244,7 +238,7 @@ function stylePrimaryStar(data, color){
   primarySuffix.text = data.suffixLong;
   star1.style.fill = color;
   star1Arc.style.fill = util.shadeColor(color, -30);
-  document.getElementById("background").style.fill = util.shadeColor(color, -100);
+  document.getElementById("background").style.fill = util.shadeColor(color, -120);
 }
 function setGoalCompletedStyles(completed, elem, hexColor){
 
