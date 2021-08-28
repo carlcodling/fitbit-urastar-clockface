@@ -31,6 +31,26 @@ export function get(key) {
   }
 }
 
+export function getActivityList(){
+  return [
+    settings['activity1'],
+    settings['activity2'],
+    settings['activity3'],
+    settings['activity4'],
+    settings['activity5']
+  ]
+}
+
+export function getColorList(){
+  return [
+    settings['color1'],
+    settings['color2'],
+    settings['color3'],
+    settings['color4'],
+    settings['color5']
+  ]
+}
+
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function(evt) {
   settings[evt.data.key] = evt.data.value;

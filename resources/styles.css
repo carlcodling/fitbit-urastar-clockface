@@ -107,11 +107,12 @@
 }
 
 #primaryIcon{
-  width:40;
-  height:40;
-  x:50%-20;
-  y:210;
-  fill:#ffffff
+  width:36;
+  height:36;
+  x:50%-18;
+  y:208;
+  fill:#ffffff;
+  opacity:0.7;
 }
 
 .txtStat{

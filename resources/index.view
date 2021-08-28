@@ -18,7 +18,7 @@
 
   <rect id="background" />
   <arc id="mainStatArc" x="-35" y="-35" width="406" height="406" fill="inherit" arc-width="70" start-angle="180" sweep-angle="300"  fill="#3939c5" />
-  <image id="bg" href="img/bg2.png"  fill="#000056" />
+  <image id="bg" href="img/bg3.png"  fill="#000056" />
   <image id="bgOverlay" href="img/bgoverlay.png" opacity="0.6"/>
 
   <use href="#fitfont" id="time">

@@ -15,6 +15,8 @@ const ffTime  = new FitFont({ id:'time',  font:'Manjari_52',  halign: 'middle'})
 const ffPrimaryStat  = new FitFont({ id:'ffPrimaryStat',  font:'Manjari_32',  halign: 'middle'})
 const ffPrimaryTarg  = new FitFont({ id:'ffPrimaryTarg',  font:'Manjari_32',  halign: 'middle'})
 
+const primaryIcon = document.getElementById("primaryIcon");
+
 // text elems
 const primarySuffix = document.getElementById("primarySuffix");
 const uiHR = document.getElementById("hr");
@@ -42,6 +44,13 @@ let completed_goals = [false, false, false, false, false];
 
 let secondaryFocussed = false;
 
+let currentLoadedGoals = [
+  {goal:0, raw:0},
+  {goal:0, raw:0},
+  {goal:0, raw:0},
+  {goal:0, raw:0},
+  {goal:0, raw:0}
+]
 
 /* -------- SETTINGS -------- */
 function settingsCallback(data) {
@@ -67,7 +76,7 @@ function settingsCallback(data) {
   const starElems = [star2, star3, star4, star5];
 
   statOrder.forEach(function(v,i){
-    setGoalCompletedStyles(
+    styleSecondaryStar(
       completed_goals[i+1],
       starElems[i],
       colors[i]
@@ -96,27 +105,11 @@ simpleHRM.initialize(hrmCallback);
 /* ------- ACTIVITY --------- */
 function activityCallback(data) {
 
-  const statOrder = [
-    simpleSettings.get('activity1'),
-    simpleSettings.get('activity2'),
-    simpleSettings.get('activity3'),
-    simpleSettings.get('activity4'),
-    simpleSettings.get('activity5')
-    ];
-
-  const colors = [
-    simpleSettings.get('color1'),
-    simpleSettings.get('color2'),
-    simpleSettings.get('color3'),
-    simpleSettings.get('color4'),
-    simpleSettings.get('color5')
-    ];
+  let statOrder = simpleSettings.getActivityList();
+  let colors = simpleSettings.getColorList();
 
   if(secondaryFocussed){
-    stylePrimaryStar(
-      data[statOrder[secondaryFocussed]],
-      colors[secondaryFocussed]
-    )
+    loadPrimaryGoalData(data[statOrder[secondaryFocussed]]);
     return
   }
 
@@ -126,42 +119,74 @@ function activityCallback(data) {
   // apply styles the statistic arcs and associated elements
   statOrder.forEach(function(v,i){
     if(i==0){
+      loadPrimaryGoalData(data[v]);
       stylePrimaryStar(
-        data[v],
         colors[0]
       )
     }
     else{
-      let statusChanged = newStatusChange(data[v], i);
-      if(statusChanged){
-        setGoalCompletedStyles(
-          (statusChanged === "completed" ? true:false) ,
+      //let statusChanged = hasStatusChanged(data[v], i);
+      let changed = hasDataChanged(data[v], i);
+      if(changed.completedStatus){
+        styleSecondaryStar(
+          (changed.completedStatus === "completed" ? true:false) ,
           starElems[i],
           colors[i]
         )
       }
-      styleSecondaryStars(
-        data[v],
-        starElems[i],
-        textElems[i],
-        colors[i]
-      )
+      if(changed.data){
+        loadSecondaryGoalData(
+          data[v],
+          starElems[i],
+          textElems[i],
+          colors[i]
+        )
+      }
     }
   })
+  // has data for this position changed since last run?
+  function hasDataChanged(data, i){
+    let out = {"data":false, "completedStatus":false}
+    if(data.raw != currentLoadedGoals.raw || data.goal != currentLoadedGoals.goal){
+      out.data = true;
+      currentLoadedGoals.raw = data.raw;
+      currentLoadedGoals.goal = data.goal;
+    }
+    if(data.raw >= data.goal && completed_goals[i]==false){
+      completed_goals[i] = true;
+      out.completedStatus = "completed";
+    }
+    else if(data.raw < data.goal && completed_goals[i]==true){
+      completed_goals[i] = false;
+      out.completedStatus =  "reset";
+    }
+    return out;
+  }
   // test whether the goal is complete but hasn't been registered yet
-  function newStatusChange(data, pos){
-    if(data.raw >= data.goal && completed_goals[pos]==false){
-      completed_goals[pos] = true;
-      return "completed";
-    }
-    else if(data.raw < data.goal && completed_goals[pos]==true){
-      completed_goals[pos] = false;
-      return "reset";
-    }
-    return false;
+  // function hasStatusChanged(data, pos){
+  //   if(data.raw >= data.goal && completed_goals[pos]==false){
+  //     completed_goals[pos] = true;
+  //     return "completed";
+  //   }
+  //   else if(data.raw < data.goal && completed_goals[pos]==true){
+  //     completed_goals[pos] = false;
+  //     return "reset";
+  //   }
+  //   return false;
+  // }
+
+  function loadPrimaryGoalData(data){
+    var pcnt = (100/data.goal)*data.raw;
+    if(pcnt>100) pcnt = 100;
+    star1Arc.sweepAngle = Math.round(pcnt*3.6);
+    ffPrimaryStat.text = data.pretty;
+    ffPrimaryTarg.text = data.prettyGoal;
+    primarySuffix.text = data.suffixLong;
+    let activity = simpleSettings.get("activity1");
+    primaryIcon.href = `img/${activity}Circ.png`;
   }
 
-  function styleSecondaryStars(data, elem, txtElem, hexColor){
+  function loadSecondaryGoalData(data, elem, txtElem, hexColor){
 
     let arc = elem.getElementsByClassName("statArc")[0];
     let tip = elem.getElementsByClassName("arcTip")[0];
@@ -216,37 +241,39 @@ star5.onclick = function(){
 
 /* -------- HELPERS ------------- */
 function focusSecondaryGoal(pos){
+  let colors = simpleSettings.getColorList();
   secondaryFocussed = pos;
   toggleVisibilityByClass('statContainer', 'hidden');
   toggleVisibilityByClass('txtStat', 'hidden');
   toggleVisibilityByClass('heart', 'hidden');
   ffTime.style.visibility = "hidden";
+
+  stylePrimaryStar(
+    colors[pos]
+  )
 }
 function clearSecondaryFocus(){
+  let colors = simpleSettings.getColorList();
   secondaryFocussed = false;
   toggleVisibilityByClass('statContainer', 'visible');
   toggleVisibilityByClass('txtStat', 'visible');
   toggleVisibilityByClass('heart', 'visible');
   ffTime.style.visibility = "visible";
+  stylePrimaryStar(
+    colors[0]
+  )
 }
-function stylePrimaryStar(data, color){
-  var pcnt = (100/data.goal)*data.raw;
-  if(pcnt>100) pcnt = 100;
-  star1Arc.sweepAngle = Math.round(pcnt*3.6);
-  ffPrimaryStat.text = data.pretty;
-  ffPrimaryTarg.text = data.prettyGoal;
-  primarySuffix.text = data.suffixLong;
+function stylePrimaryStar(color){
   star1.style.fill = color;
   star1Arc.style.fill = util.shadeColor(color, -30);
   document.getElementById("background").style.fill = util.shadeColor(color, -120);
 }
-function setGoalCompletedStyles(completed, elem, hexColor){
+function styleSecondaryStar(completed, elem, hexColor){
 
   let arc = elem.getElementsByClassName("statArc")[0];
   let arcBg = elem.getElementsByClassName("statArcBg")[0];
   let tip = elem.getElementsByClassName("arcTip")[0];
   let star = elem.getElementsByClassName("mainStar")[0];
-  //let innerStar = elem.getElementsByClassName("innerStar")[0];
 
   if(completed){
     tip.r = 36;
@@ -255,14 +282,12 @@ function setGoalCompletedStyles(completed, elem, hexColor){
     tip.style.fill = util.shadeColor(hexColor, -30);
     arc.style.fill = util.shadeColor(hexColor, 80);
     star.style.fill = util.shadeColor(hexColor, 60);
-    //innerStar.style.visibility = "hidden";
   }
   else{
     tip.style.fill = hexColor;
     arc.style.fill = hexColor;
     arcBg.style.fill = hexColor;
     star.style.fill = hexColor;
-    //innerStar.style.visibility = "visible";
   }
 }
 
