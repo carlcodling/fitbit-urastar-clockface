@@ -212,10 +212,10 @@ function positionStatStars(starElem, txtElem, angle){
   txtElem.x = parseInt(starCoords.x)-SMALL_STAR_RADIUS+40;
   txtElem.y = parseInt(starCoords.y)-SMALL_STAR_RADIUS+5;
 }
-positionStatStars(star2,txtStat2, 342);
-positionStatStars(star3,txtStat3, 54);
+positionStatStars(star2,txtStat2, 198);
+positionStatStars(star3,txtStat3, 342);
 positionStatStars(star4,txtStat4, 126);
-positionStatStars(star5,txtStat5, 198);
+positionStatStars(star5,txtStat5, 54);
 
 document.getElementById("primaryGoal").onclick = function(){
   clearSecondaryFocus()
