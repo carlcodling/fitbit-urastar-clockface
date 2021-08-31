@@ -26,8 +26,13 @@ export function get(key) {
     return settings[key];
   }
   else{
-    console.log("Invalid settings key");
-    return null;
+    if(defaultSettings.hasOwnProperty(key)){
+      return defaultSettings[key];
+    }
+    else{
+      console.log("Invalid settings key");
+      return null;
+    }
   }
 }
 

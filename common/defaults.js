@@ -9,5 +9,6 @@ export const defaultSettings = {
   "color3": "#fbc02d",
   "color4": "#7b1fa2",
   "color5": "#388e3c",
-  "bg":"#000000"
+  "bg":"#000000",
+  "starType":"activityIcon"
 }

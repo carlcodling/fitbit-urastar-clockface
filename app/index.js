@@ -81,6 +81,7 @@ function settingsCallback(data) {
       starElems[i],
       colors[i]
     )
+    setIconType(starElems[i],v)
   })
 }
 simpleSettings.initialize(settingsCallback);
@@ -162,18 +163,6 @@ function activityCallback(data) {
     }
     return out;
   }
-  // test whether the goal is complete but hasn't been registered yet
-  // function hasStatusChanged(data, pos){
-  //   if(data.raw >= data.goal && completed_goals[pos]==false){
-  //     completed_goals[pos] = true;
-  //     return "completed";
-  //   }
-  //   else if(data.raw < data.goal && completed_goals[pos]==true){
-  //     completed_goals[pos] = false;
-  //     return "reset";
-  //   }
-  //   return false;
-  // }
 
   function loadPrimaryGoalData(data){
     var pcnt = (100/data.goal)*data.raw;
@@ -192,7 +181,12 @@ function activityCallback(data) {
     let tip = elem.getElementsByClassName("arcTip")[0];
     let star = elem.getElementsByClassName("mainStar")[0];
 
-    txtElem.text = `${data.pretty} ${data.suffixShort}`;
+    //txtElem.text = `${data.pretty} ${data.suffixShort}`;
+    let txt = `${data.pretty} `;
+    if(simpleSettings.get("activitySuffix")){
+      txt += data.suffixShort;
+    }
+    txtElem.text = txt;
     var pcnt = (100/data.goal)*data.raw;
     if(pcnt>100) pcnt = 100;
     let angle = Math.round(pcnt*3.6);
@@ -290,6 +284,21 @@ function styleSecondaryStar(completed, elem, hexColor){
     star.style.fill = hexColor;
   }
 }
+
+function setIconType(elem, activity){
+  let icon = simpleSettings.get("starType");
+  let star = elem.getElementsByClassName("mainStar")[0];
+  if(icon == "activityIcon"){
+    star.href = `img/${activity}Circ.png`;
+  }
+  else if(icon == "star"){
+    star.href = `img/starSmall.png`;
+  }
+  else if(icon == "combo"){
+    star.href = `img/${activity}Star.png`;
+  }
+}
+
 
 function toggleVisibilityByClass(className, show){
   let elems = document.getElementsByClassName(className);

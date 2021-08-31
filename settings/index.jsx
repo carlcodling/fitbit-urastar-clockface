@@ -49,6 +49,25 @@ function mySettings(props) {
     props.settingsStorage.setItem(pos, selectedVal)
   }
   return (<Page>
+    <Section
+      title="Icon type">
+      <Select
+        label="Select"
+        settingsKey="starTypeSelect"
+        options={[
+          {name:"Activity",value:"activityIcon"},
+          {name:"Star",value:"star"},
+          {name:"Combo",value:"combo"}
+        ]}
+        onSelection={(selection) => props.settingsStorage.setItem("starType", JSON.stringify(selection.values[0].value))}
+      />
+    </Section>
+    <Section
+      title="Show activity suffix?">
+      <Toggle
+        settingsKey="activitySuffix"
+      />
+    </Section>
 
       {slots.map(([title, activity, color]) =>
         <Section
@@ -58,7 +77,6 @@ function mySettings(props) {
             settingsKey={`${activity}Select`}
             options={activities}
             onSelection={(selection) => setStatOrder(JSON.stringify(selection.values[0].value), activity)}
-            //onSelection={(selection) => props.settingsStorage.setItem(activity, JSON.stringify(selection.values[0].value))}
           />
           <ColorSelect
             settingsKey={color}

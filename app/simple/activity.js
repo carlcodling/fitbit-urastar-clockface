@@ -46,6 +46,7 @@ function getActiveMinutes() {
   let val = (today.adjusted.activeZoneMinutes.total || 0);
   let goal = (goals.activeZoneMinutes.total || 0);
   return {
+    activity: "activeMinutes",
     raw: val,
     goal: goal,
     pretty: val,
@@ -59,6 +60,7 @@ function getCalories() {
   let val = (today.adjusted.calories || 0);
   let goal = (goals.calories || 0);
   return {
+    activity: "calories",
     raw: val,
     goal: goal,
     pretty: util.numberWithCommas(val),
@@ -79,6 +81,7 @@ function getDistance() {
     suffixLong = "Miles";
   }
   return {
+    activity: "distance",
     raw: val,
     goal: goal,
     pretty: `${val.toFixed(2)}`,
@@ -92,6 +95,7 @@ function getElevationGain() {
   let val = today.adjusted.elevationGain || 0;
   let goal = (goals.elevationGain || 0);
   return {
+    activity: "elevationGain",
     raw: val,
     goal: goal,
     pretty: val,
@@ -105,6 +109,7 @@ function getSteps() {
   let val = (today.adjusted.steps || 0);
   let goal = (goals.steps || 0);
   return {
+    activity: "steps",
     raw: val,
     goal: goal,
     pretty: util.numberWithCommas(val),

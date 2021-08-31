@@ -17,9 +17,10 @@
   </defs>
 
   <rect id="background" />
-  <arc id="mainStatArc" x="-35" y="-35" width="406" height="406" fill="inherit" arc-width="70" start-angle="180" sweep-angle="300"  fill="#3939c5" />
+  <!-- <arc id="mainStatArc" x="-30" y="-30" width="396" height="396" fill="inherit" arc-width="60" start-angle="180" sweep-angle="300"  fill="#3939c5" /> -->
   <image id="bg" href="img/bg3.png"  fill="#000056" />
   <image id="bgOverlay" href="img/bgoverlay.png" opacity="0.6"/>
+  <arc id="mainStatArc" x="30" y="30" width="276" height="276" fill="inherit" arc-width="20" start-angle="180" sweep-angle="300"  fill="#3939c5" opacity="0.5" />
 
   <use href="#fitfont" id="time">
     <use href="#fitfont-char"/>
