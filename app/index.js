@@ -83,6 +83,15 @@ function settingsCallback(data) {
     )
     setIconType(starElems[i],v)
   })
+
+  let showProgressText = true;
+  if(data.showProgressText == "none"){
+    showProgressText = false;
+  }
+  positionStatStars(star2,txtStat2, 198, showProgressText);
+  positionStatStars(star3,txtStat3, 342, showProgressText);
+  positionStatStars(star4,txtStat4, 126, showProgressText);
+  positionStatStars(star5,txtStat5, 54, showProgressText);
 }
 simpleSettings.initialize(settingsCallback);
 
@@ -181,11 +190,16 @@ function activityCallback(data) {
     let star = elem.getElementsByClassName("mainStar")[0];
 
     //txtElem.text = `${data.pretty} ${data.suffixShort}`;
-    let txt = `${data.pretty} `;
-    if(simpleSettings.get("activitySuffix")){
-      txt += data.suffixShort;
+    let txt = "";
+    let showProgressText = simpleSettings.get("showProgressText");
+    if(showProgressText != "none"){
+      txt = `${data.pretty} `;
+      if(showProgressText == "long"){
+        txt += data.suffixShort;
+      }
     }
     txtElem.text = txt;
+
     var pcnt = (100/data.goal)*data.raw;
     if(pcnt>100) pcnt = 100;
     let angle = Math.round(pcnt*3.6);
@@ -203,18 +217,23 @@ simpleActivity.initialize(activityCallback);
 
 // set initial positionStatStars
 // TODO: hardcode positions
-function positionStatStars(starElem, txtElem, angle){
+function positionStatStars(starElem, txtElem, angle, showText){
   let starCoords = util.getPointOnCircle(angle, RING_RADIUS, 168, 168);
 
+  let yOffset = (showText? 10:0)
+
   starElem.x = parseInt(starCoords.x)-SMALL_STAR_RADIUS;
-  starElem.y = parseInt(starCoords.y)-SMALL_STAR_RADIUS+10;
-  txtElem.x = parseInt(starCoords.x)-SMALL_STAR_RADIUS+40;
-  txtElem.y = parseInt(starCoords.y)-SMALL_STAR_RADIUS+5;
+  starElem.y = parseInt(starCoords.y)-SMALL_STAR_RADIUS+yOffset;
+  if(showText){
+    txtElem.style.visibility = "visible";
+    txtElem.x = parseInt(starCoords.x)-SMALL_STAR_RADIUS+40;
+    txtElem.y = parseInt(starCoords.y)-SMALL_STAR_RADIUS+5;
+  }
+  else{
+    txtElem.style.visibility = "hidden";
+  }
 }
-positionStatStars(star2,txtStat2, 198);
-positionStatStars(star3,txtStat3, 342);
-positionStatStars(star4,txtStat4, 126);
-positionStatStars(star5,txtStat5, 54);
+
 
 document.getElementById("primaryGoal").onclick = function(){
   clearSecondaryFocus()

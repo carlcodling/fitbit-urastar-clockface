@@ -63,9 +63,16 @@ function mySettings(props) {
       />
     </Section>
     <Section
-      title="Show activity suffix?">
-      <Toggle
-        settingsKey="activitySuffix"
+      title="How should progress be displayed?">
+      <Select
+        label="Select"
+        settingsKey="showProgressTextSelect"
+        options={[
+          {name:"Long form [2,345 kcal]",value:"long"},
+          {name:"Short form [2,345]",value:"short"},
+          {name:"None",value:"none"}
+        ]}
+        onSelection={(selection) => props.settingsStorage.setItem("showProgressText", JSON.stringify(selection.values[0].value))}
       />
     </Section>
 

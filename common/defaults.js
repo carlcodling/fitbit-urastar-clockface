@@ -10,5 +10,6 @@ export const defaultSettings = {
   "color4": "#9c27b0",
   "color5": "#ff9800",
   "bg":"#000000",
-  "starType":"activityIcon"
+  "starType":"activityIcon",
+  "showProgressText":"long"  // long/short/none
 }
