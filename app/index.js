@@ -139,8 +139,7 @@ function activityCallback(data) {
         loadSecondaryGoalData(
           data[v],
           starElems[i],
-          textElems[i],
-          colors[i]
+          textElems[i]
         )
       }
     }
@@ -175,7 +174,7 @@ function activityCallback(data) {
     primaryIcon.href = `img/${activity}Circ.png`;
   }
 
-  function loadSecondaryGoalData(data, elem, txtElem, hexColor){
+  function loadSecondaryGoalData(data, elem, txtElem){
 
     let arc = elem.getElementsByClassName("statArc")[0];
     let tip = elem.getElementsByClassName("arcTip")[0];
@@ -263,7 +262,6 @@ function stylePrimaryStar(color){
   document.getElementById("background").style.fill = util.shadeColor(color, -120);
 }
 function styleSecondaryStar(completed, elem, hexColor){
-
   let arc = elem.getElementsByClassName("statArc")[0];
   let arcBg = elem.getElementsByClassName("statArcBg")[0];
   let tip = elem.getElementsByClassName("arcTip")[0];

@@ -4,7 +4,7 @@
       <arc id="arcBg" x="2" y="2" width="76" height="76" fill="inherit" arc-width="4" start-angle="180" sweep-angle="360" opacity="0.5" class="statArcBg" />
       <circle id="tip" class="arcTip" r="5" fill="inherit" />
       <arc id="arcFg" x="2" y="2" width="76" height="76" fill="inherit" arc-width="4" start-angle="180" sweep-angle="150" class="statArc" />
-      <image id="star" href="img/starSmall.png" x="15" y="15" width="50" height="50" fill="inherit" class="mainStar" />
+      <image id="star" href="img/starSmall.png" x="10" y="10" width="60" height="60" fill="inherit" class="mainStar" />
       <!-- <image id="innerStar" href="img/starSmall.png" x="25" y="25" width="30" height="30" fill="#000000" opacity="0.2" class="innerStar" /> -->
     </symbol>
     <!-- The symbol for a character -->
@@ -17,10 +17,10 @@
   </defs>
 
   <rect id="background" />
-  <!-- <arc id="mainStatArc" x="-30" y="-30" width="396" height="396" fill="inherit" arc-width="60" start-angle="180" sweep-angle="300"  fill="#3939c5" /> -->
+  <arc id="mainStatArc" x="-30" y="-30" width="396" height="396" fill="inherit" arc-width="60" start-angle="180" sweep-angle="300"  fill="#3939c5" />
   <image id="bg" href="img/bg3.png"  fill="#000056" />
   <image id="bgOverlay" href="img/bgoverlay.png" opacity="0.6"/>
-  <arc id="mainStatArc" x="30" y="30" width="276" height="276" fill="inherit" arc-width="20" start-angle="180" sweep-angle="300"  fill="#3939c5" opacity="0.5" />
+  <!-- <arc id="mainStatArc" x="30" y="30" width="276" height="276" fill="inherit" arc-width="20" start-angle="180" sweep-angle="300"  fill="#3939c5" opacity="0.5" /> -->
 
   <use href="#fitfont" id="time">
     <use href="#fitfont-char"/>
