@@ -179,8 +179,10 @@ function activityCallback(data) {
     ffPrimaryStat.text = data.pretty;
     ffPrimaryTarg.text = data.prettyGoal;
     primarySuffix.text = data.suffixLong;
-    let activity = simpleSettings.get("activity1");
-    primaryIcon.href = `img/${activity}Circ.png`;
+    if(!secondaryFocussed){
+      let activity = simpleSettings.get("activity1");
+      primaryIcon.href = `img/${activity}Circ.png`;
+    }
   }
 
   function loadSecondaryGoalData(data, elem, txtElem){
@@ -253,27 +255,34 @@ star5.onclick = function(){
 
 /* -------- HELPERS ------------- */
 function focusSecondaryGoal(pos){
-  let colors = simpleSettings.getColorList();
   secondaryFocussed = pos;
-  toggleVisibilityByClass('statContainer', 'hidden');
-  toggleVisibilityByClass('txtStat', 'hidden');
-  toggleVisibilityByClass('heart', 'hidden');
+  let statOrder = simpleSettings.getActivityList();
+  let colors = simpleSettings.getColorList();
   ffTime.style.visibility = "hidden";
-
+  ffPrimaryStat.text = "";
+  ffPrimaryTarg.text = "";
   stylePrimaryStar(
     colors[pos]
   )
+  primaryIcon.href = `img/${statOrder[pos]}Circ.png`;
+  toggleVisibilityByClass('statContainer', 'hidden');
+  toggleVisibilityByClass('txtStat', 'hidden');
+  toggleVisibilityByClass('heart', 'hidden');
 }
 function clearSecondaryFocus(){
   let colors = simpleSettings.getColorList();
+  let activity = simpleSettings.get("activity1");
   secondaryFocussed = false;
   toggleVisibilityByClass('statContainer', 'visible');
   toggleVisibilityByClass('txtStat', 'visible');
   toggleVisibilityByClass('heart', 'visible');
   ffTime.style.visibility = "visible";
+  ffPrimaryStat.text = "";
+  ffPrimaryTarg.text = "";
   stylePrimaryStar(
     colors[0]
   )
+  primaryIcon.href = `img/${activity}Circ.png`;
 }
 function stylePrimaryStar(color){
   star1.style.fill = color;
@@ -312,7 +321,7 @@ function setIconType(elem, activity){
     star.href = `img/starSmall.png`;
   }
   else if(icon == "combo"){
-    star.href = `img/${activity}Star.png`;
+    star.href = `img/${activity}Combo.png`;
   }
 }
 
